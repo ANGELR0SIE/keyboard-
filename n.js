@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const TRIPLE_CLICK_TIME = 600;
 
   const keyboard = document.querySelector(".keyboard");
-  const remoteBtn = document.querySelector(".remote-btn");
   const displayDirections = document.querySelector(".display-directions");
   const inputs = document.querySelectorAll("input, textArea");
   const displayKeys = document.querySelector(".display-keys");
@@ -70,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const move = () => {
-    const rowLengths = keyboards.rows.map(row => row.length);
+    const rowLengths = keyboards.rows.map((row) => row.length);
     let newRow = currentRow;
     let newCol = currentCol;
 
@@ -166,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   };
 
-  remoteBtn.addEventListener("mousedown", () => {
+  document.body.addEventListener("mousedown", () => {
     clickCount++;
     isHoldAction = false;
 
@@ -187,11 +186,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }, TRIPLE_CLICK_TIME);
   });
 
-  remoteBtn.addEventListener("mouseup", () => {
+  document.body.addEventListener("mouseup", () => {
     clearTimeout(longPressTimeout);
   });
 
-  remoteBtn.addEventListener("mouseleave", () => {
+  document.body.addEventListener("mouseleave", () => {
     clearTimeout(longPressTimeout);
   });
 

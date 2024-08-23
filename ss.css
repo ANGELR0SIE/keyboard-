@@ -349,7 +349,7 @@ input,textarea{
 
 .creadit{
   position: absolute;
-  bottom: 20px;
+  bottom: 4vh;
   margin-left: 250px;
   font-size: 12px;
   font-family: monospace;

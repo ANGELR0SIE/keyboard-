@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const displayDirections = document.querySelector(".display-directions");
   const inputs = document.querySelectorAll("input, textArea");
   const displayKeys = document.querySelector(".display-keys");
-  let currentInputIndex = 1;
+  let currentInputIndex = 0; // Set default input to "To"
 
   const updateDirectionDisplay = () => {
     displayDirections.value = `Current Direction: ${directions[currentDirectionIndex]}`;

@@ -1,25 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const keyboards = {
     rows: [
-      [
-       
-        "a",
-    
-
-        "e",
-        "i",
-        "o",
-        "u",
-        "n",
-        "t",
-        "s",
-        "r",
-        "l",
-        "1",
-        "2",
-        "3",
-        ",",
-      ],
+      ["a", "e", "i", "o", "u", "n", "t", "s", "r", "l", "1", "2", "3", ","],
       ["c", "d", "h", "m", "p", "b", "g", "y", "f", "w", "4", "5", "6", "'"],
       ["v", "k", "x", "j", "q", "z", ".", "@", "_", "-", "7", "8", "9", "0"],
       ["Backspace", "Tab", "Enter", "Space", "Next", "Send"],
@@ -88,41 +70,48 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const move = () => {
+    const rowLengths = keyboards.rows.map(row => row.length);
+    let newRow = currentRow;
+    let newCol = currentCol;
+
     switch (directions[currentDirectionIndex]) {
       case "right":
-        currentCol++;
-        if (currentCol >= keyboards.rows[currentRow].length) {
-          currentCol = 0;
-          currentRow = (currentRow + 1) % keyboards.rows.length;
+        newCol++;
+        if (newCol >= rowLengths[currentRow]) {
+          newCol = 0;
+          newRow = (currentRow + 1) % keyboards.rows.length;
         }
         break;
       case "down":
-        currentRow++;
-        if (currentRow >= keyboards.rows.length) {
-          currentRow = 0;
+        newRow++;
+        if (newRow >= keyboards.rows.length) {
+          newRow = 0;
         }
-        // if (currentCol >= keyboards.rows[currentRow].length) {
-        //   currentCol = keyboards.rows[currentRow].length - 1;
-        // }
+        if (newCol >= rowLengths[newRow]) {
+          newCol = rowLengths[newRow] - 1;
+        }
         break;
       case "left":
-        if (currentCol > 0) {
-          currentCol--;
+        if (newCol > 0) {
+          newCol--;
         } else {
-          currentCol = keyboards.rows[currentRow].length - 1;
+          newCol = rowLengths[currentRow] - 1;
         }
         break;
       case "up":
-        if (currentRow > 0) {
-          currentRow--;
+        if (newRow > 0) {
+          newRow--;
         } else {
-          currentRow = keyboards.rows.length - 1;
+          newRow = keyboards.rows.length - 1;
         }
-        if (currentCol >= keyboards.rows[currentRow].length) {
-          currentCol = keyboards.rows[currentRow].length - 1;
+        if (newCol >= rowLengths[newRow]) {
+          newCol = rowLengths[newRow] - 1;
         }
         break;
     }
+
+    currentRow = newRow;
+    currentCol = newCol;
     updateMatrix();
   };
 
@@ -140,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (selectedKey === "Tab") {
       currentInput.value += "\t";
     } else if (selectedKey === "Space") {
-      key.id = "space";
       currentInput.value += " ";
     } else if (selectedKey === "Enter") {
       currentInput.value += "\n";
@@ -152,7 +140,6 @@ document.addEventListener("DOMContentLoaded", function () {
       inputs[currentInputIndex].focus();
     } else if (selectedKey === "Send") {
       inputs.forEach((input) => (input.value = ""));
-      // alert("Send");
       showPopup();
     } else {
       currentInput.value += selectedKey;
@@ -163,7 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var popups = document.querySelectorAll(".send-message");
     popups.forEach((popup) => {
       popup.style.display = "flex";
-      showCancelButton: false,
       setTimeout(() => {
         popup.style.display = "none";
       }, 2000);

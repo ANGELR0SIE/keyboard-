@@ -9,13 +9,15 @@
 }
 
 body {
-  /* height: 100vh; */
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #d6d6d6;
   font-family: font1;
   padding: 10px;
+  /* height: 100%; */
+
 }
 textarea {
   resize: none;
@@ -152,6 +154,7 @@ textarea {
   justify-content: center;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
+  padding: 20px;
 }
 
 .top h1 {
@@ -289,8 +292,10 @@ textarea {
 li {
   list-style: none;
   /* font-family:sans-serif; */
-  font-size: 18px;
-  line-height: 25px;
+  /* font-size: 18px; */
+  /* line-height: 25px; */
+  padding: 06px 0;
+  text-transform: wrap;
 }
 
 .instruction {
@@ -300,6 +305,7 @@ li {
   border: 1px dashed;
   line-height: 24px;
   padding: 10px;
+  max-width: 380px;
 }
 
 .instruction h2 {

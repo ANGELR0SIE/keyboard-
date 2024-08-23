@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Traversal</title>
+    <style>
+        .matrix {
+            display: grid;
+            grid-template-columns: repeat(5, 50px);
+            grid-template-rows: repeat(5, 50px);
+            gap: 1px;
+        }
+        .cell {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: lightgray;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            text-transform: lowercase;
+        }
+        .selected {
+            background-color: lightblue;
+        }
+        #direction-display {
+            margin-top: 10px;
+        }
+        #output-display {
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="matrix" id="matrix"></div>
+<button id="remote-btn">Move/Change Direction</button>
+<div id="direction-display">Current Direction: Right</div>
+<div id="output-display"></div>
+
+<script>
+    const matrixSize = 5;
+    let currentRow = 0;
+    let currentCol = 0;
+    let currentDirectionIndex = 0;
+    let isCapsLock = false;
+
+    // Directions: right, down, left, up
+    const directions = ["right", "down", "left", "up"];
+
+    // Create matrix and render it with lowercase letters
+    const matrix = document.getElementById('matrix');
+    for (let i = 0; i < matrixSize; i++) {
+        for (let j = 0; j < matrixSize; j++) {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            cell.textContent = String.fromCharCode(97 + i * matrixSize + j); // Add letters
+            matrix.appendChild(cell);
+        }
+    }
+
+    function updateMatrix() {
+        const cells = document.querySelectorAll('.cell');
+        cells.forEach(cell => cell.classList.remove('selected'));
+        const index = currentRow * matrixSize + currentCol;
+        cells[index].classList.add('selected');
+    }
+
+    function move() {
+        switch (directions[currentDirectionIndex]) {
+            case "right":
+                if (currentCol < matrixSize - 1) currentCol++;
+                break;
+            case "down":
+                if (currentRow < matrixSize - 1) currentRow++;
+                break;
+            case "left":
+                if (currentCol > 0) currentCol--;
+                break;
+            case "up":
+                if (currentRow > 0) currentRow--;
+                break;
+        }
+        updateMatrix();
+    }
+
+    function changeDirection() {
+        currentDirectionIndex = (currentDirectionIndex + 1) % directions.length;
+        document.getElementById('direction-display').textContent = `Current Direction: ${directions[currentDirectionIndex]}`;
+    }
+
+    function printCellLetter() {
+        const cell = document.querySelector('.selected');
+        const outputDiv = document.getElementById('output-display');
+        let letter = cell.textContent;
+        if (isCapsLock) {
+            letter = letter.toUpperCase();
+        }
+        outputDiv.textContent += letter;
+    }
+
+    function toggleCapsLock() {
+        isCapsLock = !isCapsLock;
+        const cells = document.querySelectorAll('.cell');
+        cells.forEach(cell => {
+            cell.style.textTransform = isCapsLock ? 'uppercase' : 'lowercase';
+        });
+    }
+
+    let clickCount = 0;
+    let clickTimeout;
+    let holdTimeout;
+    let isHoldAction = false;
+
+    document.getElementById('remote-btn').addEventListener('mousedown', () => {
+        // Set a timeout for the press-and-hold action
+        holdTimeout = setTimeout(() => {
+            isHoldAction = true; // Mark that a hold action occurred
+            move(); // Move without printing anything
+        }, 2000); // Press and hold duration for 2 seconds
+    });
+
+    document.getElementById('remote-btn').addEventListener('mouseup', () => {
+        // Clear the hold timeout if it wasn't triggered
+        if (holdTimeout) clearTimeout(holdTimeout);
+
+        // Allow click actions if no hold action occurred
+        if (!isHoldAction) {
+            clickCount++;
+            if (clickTimeout) clearTimeout(clickTimeout);
+
+            clickTimeout = setTimeout(() => {
+                if (clickCount === 1) {
+                    // Handle single click action (print letter)
+                    printCellLetter();
+                } else if (clickCount === 2) {
+                    // Handle double click action (change direction)
+                    changeDirection();
+                } else if (clickCount === 3) {
+                    // Handle triple click action (toggle Caps Lock)
+                    toggleCapsLock();
+                }
+                clickCount = 0; // Reset click count after handling
+            }, 300); // Double/triple click threshold
+        }
+
+        // Reset the hold action flag for the next interaction
+        isHoldAction = false;
+    });
+
+    // Initialize matrix
+    updateMatrix();
+</script>
+
+</body>
+</html>

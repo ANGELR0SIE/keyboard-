@@ -356,8 +356,9 @@ input,textarea{
 
 .creadit{
   position: absolute;
-  bottom: 4vh;
-  margin-left: 250px;
+    top: 20px;
+    right: 20px;
+    bottom: auto;
   font-size: 12px;
   font-family: monospace;
   letter-spacing: -1px;
@@ -392,7 +393,7 @@ a{
     max-width: 100%;
     bottom: 0;
     top: auto;
-    background-color: rgba(136, 120, 120);
+    background-color: rgba(136, 120, 120, 0.333);
     left: 0;
     font-size: 12px;
   }
@@ -415,11 +416,7 @@ a{
   li{
     text-wrap: nowrap;
   }
-.creadit{
-  top: 0;
-  right: 0;
-  bottom: auto;
-}
+
 
   .contens-flex{
     height: 170px;
@@ -466,12 +463,6 @@ align-items: center;
    }
    .main{
     margin-top: -50px;
-   }
-   .creadit{
-    top: 20px;
-    left: 20px;
-    margin: 0;
-    bottom: auto;
    }
    .keys-flex{
    right: 0;

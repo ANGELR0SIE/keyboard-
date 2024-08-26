@@ -18,6 +18,7 @@ body {
   padding: 10px;
   /* height: 100%; */
 color: #333545;
+overflow-x: hidden;
 }
 textarea {
   resize: none;
@@ -305,12 +306,18 @@ li {
   border: 1px dashed;
   line-height: 24px;
   padding: 10px;
+  text-overflow: ellipsis;
+  max-width: 100%;
   max-width: 380px;
+  width: fit-content;
 }
-
+ul{
+  width: fit-content;
+}
 .instruction h2 {
   text-decoration-line: underline;
   line-height: 52px;
+  width: fit-content;
 }
 
 /* prompts---- */
@@ -369,3 +376,153 @@ a{
   padding: 40px;
   background-color: #efba27;
 } */
+
+@media(max-width:1355px){
+  .instruction{
+    width: 300px;
+    font-size: 14px;
+  }
+  .content textarea{
+    width: 100%;
+  }
+}
+@media(max-width:1180px){
+  .instruction{
+    width: 100%;
+    max-width: 100%;
+    bottom: 0;
+    top: auto;
+    background-color: rgba(136, 120, 120);
+    left: 0;
+    font-size: 12px;
+  }
+  .instruction h2{
+    font-size: 16px;
+    padding-top: 0;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+  }
+  .main{
+    margin-top: 0;
+  }
+  .hide{
+    display: none !important;
+  }
+  .instruction ul{
+    display: flex;
+  }
+  body{
+    align-items: flex-start;
+  }
+  li{
+    text-wrap: nowrap;
+  }
+.creadit{
+  top: 0;
+  right: 0;
+  bottom: auto;
+}
+
+  .contens-flex{
+    height: 170px;
+  }
+  .key{
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+    padding: 0;
+   }
+   #tab,#send,#enter,#space,#next{
+    font-size: 16px;
+    width: 80px !important;
+    margin-top: 10px;
+   }
+   #backspace{
+    width:150px;
+    font-size: 16px;
+   }
+   #send{
+    width: 180px !important;
+   }
+
+}
+@media(max-width:1000px){
+ .keys-flex{
+  position: relative;
+  right: -35px;
+ }
+ li{
+  text-overflow: ellipsis;
+ }
+ body{
+align-items: center;
+   .instruction{
+    width: 100vw;
+    bottom: 0;
+    top: auto;
+    background-color: rgba(136, 120, 120, 0.333)
+   }
+   .instruction ul{
+    flex-direction: row;
+   }
+   .main{
+    margin-top: -50px;
+   }
+   .creadit{
+    top: 20px;
+    left: 20px;
+    margin: 0;
+    bottom: auto;
+   }
+   .keys-flex{
+   right: 0;
+   left: 0;
+   }
+}
+}
+@media(max-width:1000px){
+  .key{
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    text-align: center;
+    padding: 0;
+   }
+
+   .instruction ul{
+    flex-direction: column;
+   }
+   .keys-flex{
+    position: relative;
+    right: 0px;
+    left: 0;
+   }
+   .row, .keyboard{
+    width: fit-content;
+   }
+   #send{
+    width: 155px !important;
+   }
+   #backspace{
+    width: 100px;
+   }
+   #tab,#enter,#space,#next{
+    font-size: 16px;
+    width: 60px !important;
+    margin-top: 10px;
+   }
+   .contens-flex{
+    height: 150px;
+   }
+   .mail{
+    width: 100% !important;
+
+   }
+   @media (max-width:500px) {
+    .contens-flex{
+      height: 180px;
+    }
+   }
+}

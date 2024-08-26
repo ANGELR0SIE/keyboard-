@@ -16,6 +16,7 @@ body {
   background: #d6d6d6;
   font-family: font1;
   padding: 10px;
+  box-sizing: border-box;
   /* height: 100%; */
 color: #333545;
 overflow-x: hidden;
@@ -396,6 +397,7 @@ a{
     background-color: rgba(136, 120, 120, 0.333);
     left: 0;
     font-size: 12px;
+    /* position: static; */
   }
   .instruction h2{
     font-size: 16px;
@@ -460,6 +462,9 @@ align-items: center;
    }
    .instruction ul{
     flex-direction: row;
+    width: 100%;
+    scrollbar-width: none;
+    overflow: scroll;
    }
    .main{
     margin-top: -50px;
@@ -481,6 +486,8 @@ align-items: center;
 
    .instruction ul{
     flex-direction: column;
+    width: 100%;
+
    }
    .keys-flex{
     position: relative;

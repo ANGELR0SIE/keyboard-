@@ -412,9 +412,6 @@ a{
   .instruction ul{
     display: flex;
   }
-  body{
-    align-items: flex-start;
-  }
   li{
     text-wrap: nowrap;
   }

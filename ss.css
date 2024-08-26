@@ -17,12 +17,15 @@ body {
   font-family: font1;
   padding: 10px;
   box-sizing: border-box;
+  cursor: pointer;
   /* height: 100%; */
 color: #333545;
 overflow-x: hidden;
+
 }
 textarea {
   resize: none;
+  cursor: pointer;
 }
 
 .row {
@@ -475,13 +478,20 @@ align-items: center;
    }
 }
 }
-@media(max-width:1000px){
+@media(max-width:830px){
   .key{
     width: 30px;
     height: 30px;
     font-size: 14px;
     text-align: center;
     padding: 0;
+   }
+
+   .creadit {
+    background-color: #333545;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
    }
 
    .instruction ul{
@@ -520,4 +530,20 @@ align-items: center;
       height: 180px;
     }
    }
+}
+
+@media(max-width:612px){
+  .key{
+font-size: 10px !important;
+width: 25px;
+height: 30 !important;
+  }
+  #send{
+    width: 80px !important;
+  }
+}
+@media(max-width:540px){
+  body{
+    content: "MObile Responsive is not available";
+  }
 }
